@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>YouTube Videó Letöltő</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0; padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 30px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 12px rgba(0,0,0,0.1);
+        }
+        h1 { text-align: center; color: #4CAF50; }
+        input[type=text], select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px;
+            width: 100%;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .message {
+            text-align: center;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+        .success {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .error {
+            background-color: #f44336;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>YouTube Videó Letöltő</h1>
+        <form action="/download" method="POST">
+            <input type="text" name="youtube_url" placeholder="Add meg a YouTube videó linkjét" required />
+            <label for="format_choice">Válaszd ki a formátumot:</label>
+            <select id="format_choice" name="format_choice" required>
+                <option value="mp4">MP4 (videó)</option>
+                <option value="mp3">MP3 (hang)</option>
+            </select>
+            <button type="submit">Videó Letöltése</button>
+        </form>
+
+        {% if success %}
+            <div class="message success">{{ success }}</div>
+        {% endif %}
+        {% if error %}
+            <div class="message error">{{ error }}</div>
+        {% endif %}
+    </div>
+</body>
+</html>
